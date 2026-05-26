@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pina Importation Hub</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green-dark: #1a4d2e;
+      --green-mid: #2d7a4f;
+      --green-light: #4caf50;
+      --yellow: #f5c518;
+      --yellow-light: #fff8d6;
+      --yellow-dark: #c49a00;
+      --white: #ffffff;
+      --off-white: #fafaf7;
+      --text-dark: #0f2d1a;
+      --text-muted: #4a7a5a;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--green-dark);
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(245, 197, 24, 0.18) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(76, 175, 80, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 60px 24px 50px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(245, 197, 24, 0.15);
+      border: 1px solid rgba(245, 197, 24, 0.4);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--yellow);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--yellow);
+      color: var(--green-dark);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(245, 197, 24, 0.35);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(245, 197, 24, 0.5);
+    }
+
+    .cta-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* ── WAVE ── */
+    .wave {
+      display: block;
+      background: var(--green-dark);
+      line-height: 0;
+    }
+
+    .wave svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--white);
+      padding: 56px 24px;
+    }
+
+    .section-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 12px;
+    }
+
+    .about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .about p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .service-card {
+      background: var(--off-white);
+      border: 1.5px solid #e8f0ea;
+      border-radius: 16px;
+      padding: 24px 20px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--green-light);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--yellow-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 22px;
+    }
+
+    .service-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      padding: 64px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(245, 197, 24, 0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 1rem;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .cta-section .cta-btn {
+      position: relative;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text-dark);
+      color: rgba(255, 255, 255, 0.5);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--yellow);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-inner>* {
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-inner>*:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .hero-inner>*:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+
+    .hero-inner>*:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .hero-inner>*:nth-child(4) {
+      animation-delay: 0.55s;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── FLOATING WHATSAPP BUTTON ── */
+    .float-wa {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #25d366;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 14px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.45);
+      transition: transform 0.2s, box-shadow 0.2s, max-width 0.4s ease;
+      overflow: hidden;
+      max-width: 220px;
+    }
+
+    .float-wa:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(37, 211, 102, 0.55);
+    }
+
+    .float-wa svg {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+    }
+
+    .float-wa .float-label {
+      white-space: nowrap;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .float-wa {
+      animation: floatIn 0.6s ease 1.5s both;
+    }
+
+    /* ── TOAST NOTIFICATION ── */
+    .toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-80px);
+      background: var(--green-dark);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 14px 24px;
+      border-radius: 100px;
+      border-left: 4px solid var(--yellow);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast span {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--NAVBAR-->
+  <nav class="navbar">
+    <a class="navbar-logo" href="#">
+
+      <img src="static/images/logo.jpg" alt="Pina Importation Hub Logo">
+
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="badge">🌍 Pina Importation Hub</div>
+      <h1>Shop Smart.<br><span>Grow Bigger.</span></h1>
+      <p>Your one-stop destination for braiding extensions, accessories, fashion items, and China importation
+        training.
+        With us, you don't just shop — you grow, learn, and succeed.</p>
+      <a class="cta-btn" href="https://wa.me/2349053175822" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+          <path
+            d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.11 1.524 5.833L.057 23.486a.5.5 0 0 0 .612.612l5.653-1.467A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.7-.503-5.265-1.385l-.378-.216-3.913 1.016 1.016-3.913-.216-.378A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+        </svg>
+        Chat with Us on WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- WAVE DIVIDER -->
+  <div class="wave">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" height="60">
+      <path d="M0,0 C300,60 900,60 1200,0 L1200,60 L0,60 Z" fill="#ffffff" />
+    </svg>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">🔥 <span>500+</span> customers already growing with us!</div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a class="float-wa" href="https://wa.me/2349053175822" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+      <path
+        d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.11 1.524 5.833L.057 23.486a.5.5 0 0 0 .612.612l5.653-1.467A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.7-.503-5.265-1.385l-.378-.216-3.913 1.016 1.016-3.913-.216-.378A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+    </svg>
+    <span class="float-label">Chat on WhatsApp</span>
+  </a>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="section-inner">
+      <p class="section-label reveal">Who we are</p>
+      <h2 class="reveal">Wholesale, Retail & Importation Experts</h2>
+      <p class="reveal">We deal in wholesale and retail of braiding extensions, accessories and fashion items.
+        Beyond
+        fashion, we also specialize in China importation training — helping business owners learn the secrets of
+        successful importing.</p>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">💎</div>
+          <h3>Braiding Extensions</h3>
+          <p>Wholesale & retail of quality hair extensions and accessories.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">👗</div>
+          <h3>Fashion Items</h3>
+          <p>Trendy and affordable fashion pieces for every style.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">📦</div>
+          <h3>Procurement Services</h3>
+          <p>We handle sourcing and procurement on your behalf from China.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">💴</div>
+          <h3>Yuan (CNY) Sales</h3>
+          <p>We sell Chinese Yuan to make your importation seamless.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🎓</div>
+          <h3>Importation Training</h3>
+          <p>Learn the secrets of successful China importation for your business.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🚀</div>
+          <h3>Business Support</h3>
+          <p>End-to-end support to help your business grow and thrive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <h2 class="reveal">Scale Your Business Today</h2>
+    <p class="reveal">Join hundreds of smart shoppers and business owners already growing with us.</p>
+    <a class="cta-btn reveal" href="https://wa.me/2349053175822" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.11 1.524 5.833L.057 23.486a.5.5 0 0 0 .612.612l5.653-1.467A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.7-.503-5.265-1.385l-.378-.216-3.913 1.016 1.016-3.913-.216-.378A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+      </svg>
+      Tap Here To Join Now
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 <span>Pina Importation Hub</span> · All rights reserved</p>
+  </footer>
+
+  <script>// ── 1. SCROLL REVEAL ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── 2. TOAST NOTIFICATION ──
+    const toast = document.getElementById('toast');
+    setTimeout(() => {
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }, 2500);
+
+    // ── 3. FLOATING BUTTON — collapse on scroll ──
+    const floatBtn = document.querySelector('.float-wa');
+    const floatLabel = floatBtn.querySelector('.float-label');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > 200 && current > lastScroll) {
+        floatLabel.style.display = 'none';
+        floatBtn.style.maxWidth = '56px';
+        floatBtn.style.padding = '14px';
+      } else {
+        floatLabel.style.display = '';
+        floatBtn.style.maxWidth = '220px';
+        floatBtn.style.padding = '14px 22px';
+      }
+      lastScroll = current;
+    });</script>
+
+</body>
+
+</html>
