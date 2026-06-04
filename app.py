@@ -10,7 +10,7 @@ load_dotenv()
 app = Flask(__name__)
 
 #--SECRET KEY--
-app.secret_key = os.getenv("solomonbibi-2022")
+app.secret_key = os.getenv("SECRET_KEY")
 
 #--RATE LIMITING--
 #stops people from spamming your routese
@@ -26,7 +26,6 @@ Talisman(app, force_https=False) #Set True when deployed
 
 WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER")
 
-WHATSAPP_NUMBER=2349053175822
 
 @app.route("/")
 @limiter.limit("30 per hour")
@@ -41,3 +40,4 @@ def whatsapp():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
